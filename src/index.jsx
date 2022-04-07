@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
 // import Survey from './pages/Survey'
 // import Results from './pages/Results'
-// import Freelances from './pages/Freelances'
+import Projets from './pages/Projets'
+// import Freelances from './pages/Projets'
 // import Profile from './pages/Profile'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -26,9 +27,10 @@ ReactDOM.render(
             {/* <Route path="/survey/:questionNumber">
               <Survey />
             </Route> */}
-            {/* <Route path="/results">
-              <Results />
-            </Route> */}
+            { <Route 
+              path="/projets/:id"
+              render={(props) => <Projets {...props} />}
+              />}
             {/* <Route path="/freelances">
               <Freelances />
             </Route> */}

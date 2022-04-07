@@ -1,4 +1,4 @@
-import Results, { formatQueryParams, formatJobList } from './'
+import Results, { formatQueryParams, formatJobList } from '.'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import { waitForElementToBeRemoved, screen } from '@testing-library/react'

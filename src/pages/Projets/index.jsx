@@ -55,7 +55,9 @@ const LoaderWrapper = styled.div`
 
 export function formatQueryParams(answers) {
   const answerNumbers = Object.keys(answers)
+  console.log('answers =>',answers)
 
+  console.log('answerNumbers =>',answerNumbers)
   return answerNumbers.reduce((previousParams, answerNumber, index) => {
     const isFirstParam = index === 0
     const separator = isFirstParam ? '' : '&'
@@ -65,21 +67,24 @@ export function formatQueryParams(answers) {
 
 export function formatJobList(title, listLength, index) {
   if (index === listLength - 1) {
+    console.log('title =>',title)
+    console.log('listLength =>',listLength)
+    console.log('index =>',index)
+    
+
     return title
   } else {
     return `${title},`
   }
 }
 
-function Results() {
+function Projets() {
   const { theme } = useTheme()
-  const { answers } = useContext(SurveyContext)
-  const queryParams = formatQueryParams(answers)
-
+  // console.log('queryParams =>',queryParams)
   const { data, isLoading, error } = useFetch(
-    `http://localhost:3002/results?${queryParams}`
+    // `https://gitlab.ezdev.fr/api/v4/projects/`
+    `https://api.github.com/users/Heidet/repos`
   )
-
   if (error) {
     return <span>Il y a un problème</span>
   }
@@ -129,4 +134,4 @@ function Results() {
   )
 }
 
-export default Results
+export default Projets
