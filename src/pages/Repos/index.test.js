@@ -1,6 +1,6 @@
 import { MemoryRouter } from 'react-router-dom'
 import { render, screen } from '@testing-library/react'
-import Home from './'
+import Home from '.'
 import { ThemeProvider } from '../../utils/context'
 
 describe('The Home component', () => {
@@ -8,7 +8,7 @@ describe('The Home component', () => {
     render(
       <MemoryRouter>
         <ThemeProvider>
-          <Home />
+          <Repos />
         </ThemeProvider>
       </MemoryRouter>
     )

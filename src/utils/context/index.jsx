@@ -15,7 +15,8 @@ export const ThemeProvider = ({ children }) => {
   )
 }
 
-export const SurveyContext = createContext()
+export const ProjetsContext = createContext()
+
 
 export const SurveyProvider = ({ children }) => {
   const [answers, setAnswers] = useState({})
@@ -24,8 +25,8 @@ export const SurveyProvider = ({ children }) => {
   }
 
   return (
-    <SurveyContext.Provider value={{ answers, saveAnswers }}>
+    <ProjetsContext.Provider value={{ answers, saveAnswers }}>
       {children}
-    </SurveyContext.Provider>
+    </ProjetsContext.Provider>
   )
 }
