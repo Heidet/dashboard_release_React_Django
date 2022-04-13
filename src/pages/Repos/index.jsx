@@ -16,6 +16,7 @@ import {
   GridToolbarExport,
   GridToolbarDensitySelector,
 } from '@mui/x-data-grid';
+import { GridRowParams } from '@mui/x-data-grid';
 import { useDemoData } from '@mui/x-data-grid-generator';
 
 
@@ -49,8 +50,8 @@ const ColStyled = styled.span`
   color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
 `
 
-
 const StyledTitle = styled.h2`
+  text-align: center;
   padding-bottom: 30px;
   line-height: 50px;
   color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
@@ -59,6 +60,7 @@ const StyledTitle = styled.h2`
 const Illustration = styled.img`
   flex: 1;
 `
+
 const LoaderWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -75,14 +77,17 @@ function CustomToolbar() {
     </GridToolbarContainer>
   );
 }
+
 const columns = [
-  { field: 'id', headerName: 'ID', width: 100 },
-  { field: "name", headerName: "Name", width: 100 },
-  { field: "full_name", headerName: "full_name", width: 100 },
-  { field: "updated_at", headerName: "updated_at", width: 100 },
+  { field: 'id', headerName: 'ID', width: 200, },
+  { field: "name", headerName: "Projet", width: 200 },
+  { field: "full_name", headerName: "Full_name", width: 200 },
+  { field: "updated_at", headerName: "updated_at", width: 200 },
 
 
 ];
+
+
 
 export default function Repos() {
   const { theme } = useTheme()
@@ -95,7 +100,7 @@ export default function Repos() {
   if (error) {
     return <span>Il y a un problème</span>
   }
-
+  
   return isLoading ? (
       <LoaderWrapper>
         <Loader data-testid="loader" />
@@ -104,21 +109,24 @@ export default function Repos() {
     console.log('data =>',data),
     console.log('isLoading =>',isLoading),
     console.log('error =>',error),
+
     <HomeWrapper>
-       {/* <HomerContainer theme={theme}> */}
         <div style={{ height: 400, width: '100%' }}>
           <DataGrid
             rows={data}
             columns={columns}
-
+            // rowClick={console.log('coucou')}
             pageSize={15}
-            checkboxSelection
+            isRowSelectable = {(params) => console.log(params)}
+            disableMultipleSelection={true}
+            onCellClick={(params)  => console.log(params)}
+            rowClick={(params)  => console.log(params)}
+            // checkboxSelection
             components={{
               Toolbar: CustomToolbar,
             }}
-            />
-          </div>
-       {/* </HomerContainer> */}
+          />
+        </div>
     </HomeWrapper>
   );
 }
@@ -140,31 +148,19 @@ export default function Repos() {
 //     <Loader data-testid="loader" />
 //   </LoaderWrapper>
 // ) : (
-//   console.log('data =>',data),
-//   console.log('isLoading =>',isLoading),
-//   console.log('error =>',error),
 //     <HomeWrapper>
-//       <HomerContainer theme={theme}>
-//         <LeftCol>
-//           <StyledTitle theme={theme}>
-//             <h1> Fetch data projet en cours </h1>   
-//           </StyledTitle>
-//           <Container>
-//               <Row>
-//               {data && data.map((result) => ( 
-//                 <Col theme={theme}>
-//                   <StyledLink $theme={theme} key={`/-${result.name}`} to={`/commits/${result.name}`} >Projet : { result.name }</StyledLink>
-//                   <br></br>
-//                 </Col>
-//               ))}
-//               </Row>
-//           </Container>
-//           {/* <StyledLink to="/survey/1" $isFullLink> */}
-//             {/* toto */}
-//           {/* </StyledLink> */}
-//         </LeftCol>
-//         {/* <Illustration src={HomeIllustration} /> */}
-//       </HomerContainer>
+//         <StyledTitle theme={theme}>
+//           <h1> Fetch data projet en cours </h1>   
+//         </StyledTitle>
+//         <Row>
+//         {data && data.map((result) => ( 
+//           <Col theme={theme}>
+//             <StyledLink $theme={theme} key={`/-${result.name}`} to={`/projets/${result.name}`} >Projet : { result.name }</StyledLink>
+//             <br></br>
+//           </Col>
+//         ))}
+//         </Row>
+
 //     </HomeWrapper>
 //   )
 // }

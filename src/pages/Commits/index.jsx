@@ -9,7 +9,6 @@ import { Component } from 'react'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-
 import * as React from 'react';
 import {
   DataGrid,
@@ -32,6 +31,14 @@ const ResultsContainer = styled.div`
     theme === 'light' ? colors.backgroundLight : colors.backgroundDark};
 `
 
+const StyledTitle = styled.h2`
+  text-align: center;
+  padding-bottom: 30px;
+  line-height: 50px;
+  color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
+`
+
+
 const ResultsTitle = styled.h2`
   color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
   font-weight: bold;
@@ -43,7 +50,9 @@ const ResultsTitle = styled.h2`
   }
 `
 const HomeWrapper = styled.div`
-  display: flex;
+  // display: flex;
+  width: '100%';
+  height: 400;
   justify-content: center;
 `
 
@@ -73,23 +82,14 @@ const LoaderWrapper = styled.div`
   justify-content: center;
 `
 
-const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: "user", headerName: "User", width: 70 },
-  { field: "fromaddress", headerName: "Sender", width: 70 },
-  { field: "dkimSpfChk", headerName: "DKIM/SPF", width: 70 },
-  { field: "replySenderMismatch", headerName: "Reply MisMatch", width: 70 },
-  { field: "riskywordchk", headerName: "Risky Word", width: 70 },
-  { field: "domainagechk", headerName: "Sender Domain Age", width: 70 },
-  { field: "attachmentChk", headerName: "Attachments", width: 70 },
-  { field: "riskyLinkAge", headerName: "Body Link Age", width: 70 },
-  { field: "riskyLinkTypo", headerName: "Link Typosquatting", width: 70 },
-  {
-    field: "senderTypoSquatting",
-    headerName: "Sender TypoSquatting",
-    width: 70,
-  }
-];
+// const columns = [
+//   { field: 'node_id', headerName: 'ID', width: 100 },
+//   { field: "name", headerName: "Name", width: 100 },
+//   { field: "full_name", headerName: "full_name", width: 100 },
+//   { field: "updated_at", headerName: "updated_at", width: 100 },
+
+
+// ];
 // componentDidMount() {
 //   const { id } = this.props.match.params
 //   fetch(`https://api.github.com/repos/Heidet/${id}/commits`)
@@ -125,61 +125,64 @@ function CustomToolbar() {
   );
 }
 
-export default function Commits(props) {
-  // const { data } = useDemoData({
-  //   dataSet: 'Commodity',
-  //   rowLength: 10,
-  //   maxColumns: 6,
-  // });
-  const { theme } = useTheme()
-  const { id } = props.match.params
-  const { data, isLoading, error } = useFetch(`https://api.github.com/repos/Heidet/${id}/commits`)
-
-  return (
-    
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        id={Math.random()}
-        rows={data}
-         columns={columns}
-
-         pageSize={15}
-         checkboxSelection
-        components={{
-          Toolbar: CustomToolbar,
-        }}
-      />
-    </div>
-  );
-}
-
-// function Commits(props) {
+// export default function Commits(props) {
+//   // const { data } = useDemoData({
+//   //   dataSet: 'Commodity',
+//   //   rowLength: 10,
+//   //   maxColumns: 6,
+//   // });
 //   const { theme } = useTheme()
 //   const { id } = props.match.params
 //   const { data, isLoading, error } = useFetch(`https://api.github.com/repos/Heidet/${id}/commits`)
 
+//   return (
+    
+//     <div style={{ height: 400, width: '100%' }}>
+//       <DataGrid
+//         id={data.node_id}
+//         rows={data}
+//         columns={columns}
 
-//   if (error) {
-//     return <span>Il y a un problème</span>
-//   }
-//   return isLoading ? (
-//       <LoaderWrapper>
-//         <Loader data-testid="loader" />
-//       </LoaderWrapper>
-//     ) : (
-//       console.log(data),
-//       <HomeWrapper theme={theme}>
-//         <ul>
-//           {data.map(data => (
-//             <Col theme={theme}>
-//               <StyledLink $theme={theme}>Release : {data.node_id }</StyledLink>
-//               <br></br>
-//             </Col>
-//           ))}
-//         </ul>
-//       </HomeWrapper>
+//         pageSize={15}
+//         checkboxSelection
+//         components={{
+//           Toolbar: CustomToolbar,
+//         }}
+//       />
+//     </div>
 //   );
 // }
 
+function Commits(props) {
+  const { theme } = useTheme()
+  const { id } = props.match.params
+  const { data, isLoading, error } = useFetch(`https://api.github.com/repos/Heidet/${id}/commits`)
 
-// export default Commits
+
+  if (error) {
+    return <span>Il y a un problème</span>
+  }
+  return isLoading ? (
+      <LoaderWrapper>
+        <Loader data-testid="loader" />
+      </LoaderWrapper>
+    ) : (
+      console.log(data),
+      <HomeWrapper theme={theme}>
+        <StyledTitle theme={theme}>
+          <h1> Fetch data projet en cours </h1>   
+        </StyledTitle>
+        <ul>
+          {data.map(data => (
+            <Col theme={theme}>
+              <StyledLink $theme={theme}>Release : {data.node_id }</StyledLink>
+              <br></br>
+            </Col>
+          ))}
+        </ul>
+      </HomeWrapper>
+  );
+}
+
+
+export default Commits
