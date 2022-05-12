@@ -22,7 +22,7 @@ function Header() {
   return (
     <NavContainer>
       <Link to="/">
-        <HomeLogo src={theme === 'light' ? DarkLogo : LightLogo} />
+        {/* <HomeLogo src={theme === 'light' ? DarkLogo : LightLogo} /> */}
       </Link>
       <div>
         <StyledLink $theme={theme} to="/">

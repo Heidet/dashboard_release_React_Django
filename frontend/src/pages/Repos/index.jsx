@@ -1,13 +1,11 @@
 import styled from 'styled-components'
 import colors from '../../utils/style/colors'
 import { StyledLink, Loader } from '../../utils/style/Atoms'
-import { Link } from 'react-router-dom'
 import { useTheme, useFetch } from '../../utils/hooks'
-import HomeIllustration from '../../assets/home-illustration.svg'
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import * as React from 'react';
+import { Redirect, Link } from 'react-router-dom'
+import { useNavigate, useLocation } from "react-router-dom";
+import Button from '@mui/material/Button';
 import {
   DataGrid,
   GridToolbarContainer,
@@ -16,8 +14,6 @@ import {
   GridToolbarExport,
   GridToolbarDensitySelector,
 } from '@mui/x-data-grid';
-import { GridRowParams } from '@mui/x-data-grid';
-import { useDemoData } from '@mui/x-data-grid-generator';
 
 
 const HomeWrapper = styled.div`
@@ -78,13 +74,20 @@ function CustomToolbar() {
   );
 }
 
+
 const columns = [
+  {
+    field: "Detail",
+    headerName: "Detail",
+    width: 150,
+    renderCell: (params) => (
+      <Link to={`/${params.value}`}>Detail</Link>
+    )
+  },
   { field: 'id', headerName: 'ID', width: 200, },
   { field: "name", headerName: "Projet", width: 200 },
   { field: "full_name", headerName: "Full_name", width: 200 },
   { field: "updated_at", headerName: "updated_at", width: 200 },
-
-
 ];
 
 
@@ -96,11 +99,11 @@ export default function Repos() {
     // `https://gitlab.ezdev.fr/api/v4/projects/`
     `https://api.github.com/users/Heidet/repos`
   )
-
+  
   if (error) {
     return <span>Il y a un problème</span>
   }
-  
+
   return isLoading ? (
       <LoaderWrapper>
         <Loader data-testid="loader" />
@@ -111,17 +114,15 @@ export default function Repos() {
     console.log('error =>',error),
 
     <HomeWrapper>
-        <div style={{ height: 400, width: '100%' }}>
+        <div theme={theme} style={{ height: 400, width: '100%' }}>
           <DataGrid
             rows={data}
             columns={columns}
-            // rowClick={console.log('coucou')}
             pageSize={15}
-            isRowSelectable = {(params) => console.log(params)}
-            disableMultipleSelection={true}
+            density="compact"
+            isRowSelectable={(params) =>  console.log(params)}
+            disableMultipleSelection= {true}
             onCellClick={(params)  => console.log(params)}
-            rowClick={(params)  => console.log(params)}
-            // checkboxSelection
             components={{
               Toolbar: CustomToolbar,
             }}

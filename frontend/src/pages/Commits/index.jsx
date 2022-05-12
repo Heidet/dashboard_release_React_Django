@@ -1,14 +1,8 @@
 import styled from 'styled-components'
-import EmptyList from '../../components/EmptyList'
-import PropTypes from 'prop-types'
-import { ProjetsContext } from '../../utils/context'
 import colors from '../../utils/style/colors'
 import { useFetch, useTheme } from '../../utils/hooks'
 import { StyledLink, Loader } from '../../utils/style/Atoms'
-import { Component } from 'react'
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
 import * as React from 'react';
 import {
   DataGrid,
@@ -18,7 +12,6 @@ import {
   GridToolbarExport,
   GridToolbarDensitySelector,
 } from '@mui/x-data-grid';
-import { useDemoData } from '@mui/x-data-grid-generator';
 
 
 const ResultsContainer = styled.div`

@@ -67,7 +67,7 @@ export default function NavBar() {
             sx={{ flexGrow: 1 }}
         >
         <StyledLink $theme={theme} to="/">
-          <HomeLogo src={theme === 'light' ? DarkLogo : LightLogo} />
+          {/* <HomeLogo src={theme === 'light' ? DarkLogo : LightLogo} /> */}
         </StyledLink>
         </Typography>
         <IconButton color="inherit">
