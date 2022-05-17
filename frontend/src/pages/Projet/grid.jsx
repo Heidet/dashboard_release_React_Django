@@ -1,11 +1,10 @@
 import styled from 'styled-components'
 import colors from '../../utils/style/colors'
-import { StyledLink, Loader } from '../../utils/style/Atoms'
 import { useTheme, useFetch } from '../../utils/hooks'
-import * as React from 'react';
+import { StyledLink, Loader } from '../../utils/style/Atoms'
 import { Redirect, Link } from 'react-router-dom'
-import { useNavigate, useLocation } from "react-router-dom";
-import Button from '@mui/material/Button';
+
+import * as React from 'react';
 import {
   DataGrid,
   GridToolbarContainer,
@@ -28,7 +27,6 @@ const LoaderWrapper = styled.div`
   justify-content: center;
 `
 
-
 function CustomToolbar() {
   return (
     <GridToolbarContainer>
@@ -40,44 +38,69 @@ function CustomToolbar() {
   );
 }
 
-
 const columns = [
   {
     field: "Detail",
     headerName: "Detail",
     width: 150,
     renderCell: (params) => (
-      <Link id='1' to={`/projet/${params.row.name}`}>Detail</Link>
+      console.log('params =>',params)
+      // <Link to={`/projet/${params.row.name}`}>Detail</Link>
     )
   },
-  { field: 'id', headerName: 'ID', width: 200, },
-  { field: "name", headerName: "Projet", width: 200},
-  { field: "full_name", headerName: "Full_name", width: 200 },
-  { field: "updated_at", headerName: "updated_at", width: 200 },
+  { field: 'sha', headerName: 'ID', width: 200, 
+  valueGetter: (params) => {
+    // console.log(params)
+    var result = params.id.sha
+    return result
+  }},
+  { field: "name", headerName: "Auteur", width: 110,
+  valueGetter: (params) => {
+    var result = params.id.commit.committer.name
+    return result
+  }},
+  { field: "message", headerName: "Message", width: 300,
+  valueGetter: (params) => {
+    var result = params.id.commit.message
+    return result
+  }},
+  { field: "updated_at", headerName: "Date", width: 200,
+  valueGetter: (params) => {
+    var result = params.id.commit.committer.date
+    return result
+  }},
 ];
 
 
 
-export default function Repos() {
+export default function Grid(id) {
   const { theme } = useTheme()
-
   const { data, isLoading, error } = useFetch(
-    `https://api.github.com/users/Heidet/repos`
+    `https://api.github.com/repos/Heidet/dashboard_release/commits`
   )
-
+  
   if (error) {
     return <span>Il y a un problème</span>
   }
+  // console.log('params grid =>',params)
+  console.log(data)
+  console.log(id)
+
 
   return isLoading ? (
       <LoaderWrapper>
         <Loader data-testid="loader" />
       </LoaderWrapper>
     ) : (
+    console.log('data =>',data),
+    console.log('isLoading =>',isLoading),
+    console.log('error =>',error),
+
     <HomeWrapper>
         <div theme={theme} style={{ height: 400, width: '100%' }}>
           <DataGrid
             rows={data}
+            getRowId= {(params) =>  params}
             columns={columns}
             pageSize={15}
             density="compact"
@@ -92,4 +115,3 @@ export default function Repos() {
     </HomeWrapper>
   );
 }
-

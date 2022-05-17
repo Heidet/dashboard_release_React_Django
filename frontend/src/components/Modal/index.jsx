@@ -14,8 +14,8 @@ import {
 } from "reactstrap";
 import { useTheme } from '../../utils/hooks'
 
-const HeadModal = styled.div`
-  color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
+const HeadModal = styled.span`
+color: ${({ theme }) => (theme === 'light' ? colors.primary : '#ffffff')};
 `
 
 
@@ -41,7 +41,6 @@ export default class CustomModal extends Component {
 
   render() {
     const { theme, toggle, onSave } = this.props;
-
     return (
       <Modal isOpen={true} toggle={toggle}>
         <ModalHeader theme={theme} toggle={toggle}><HeadModal>Todo Item</HeadModal></ModalHeader>

@@ -162,7 +162,7 @@ function Commits(props) {
     ) : (
       console.log(data),
       <HomeWrapper theme={theme}>
-        <StyledTitle theme={theme}>
+        {/* <StyledTitle theme={theme}>
           <h1> Fetch data projet en cours </h1>   
         </StyledTitle>
         <ul>
@@ -172,7 +172,7 @@ function Commits(props) {
               <br></br>
             </Col>
           ))}
-        </ul>
+        </ul> */}
       </HomeWrapper>
   );
 }

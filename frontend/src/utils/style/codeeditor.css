@@ -1,0 +1,9 @@
+[data-color-mode*="dark"],
+[data-color-mode*="dark"] body {
+  background: #161b22;
+}
+
+[data-color-mode*="light"],
+[data-color-mode*="light"] body {
+  background: #f6f8fa;
+}
