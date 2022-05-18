@@ -34,8 +34,8 @@ class IframeCommit extends Component{
 
   render() {
     // console.log(this.setState({ code }))
-    console.log(highlight(code, languages.js))
-    console.log(Prism.languages.js)
+    // console.log(highlight(code, languages.js))
+    // console.log(Prism.languages.js)
     return (
       <div data-color-mode="dark">
         <div className="App">
@@ -50,7 +50,6 @@ class IframeCommit extends Component{
               fontSize: 12,
             }}
           />
-  
         </div>
       </div>
       

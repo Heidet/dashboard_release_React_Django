@@ -43,10 +43,10 @@ const columns = [
     field: "Detail",
     headerName: "Detail",
     width: 150,
-    renderCell: (params) => (
-      console.log('params =>',params)
-      // <Link to={`/projet/${params.row.name}`}>Detail</Link>
-    )
+    // renderCell: (params) => (
+    //   // console.log('params =>',params)
+    //   // <Link to={`/projet/${params.row.name}`}>Detail</Link>
+    // )
   },
   { field: 'sha', headerName: 'ID', width: 200, 
   valueGetter: (params) => {
@@ -83,8 +83,8 @@ export default function Grid(id) {
     return <span>Il y a un problème</span>
   }
   // console.log('params grid =>',params)
-  console.log(data)
-  console.log(id)
+  // console.log(data)
+  // console.log(id)
 
 
   return isLoading ? (
@@ -92,9 +92,9 @@ export default function Grid(id) {
         <Loader data-testid="loader" />
       </LoaderWrapper>
     ) : (
-    console.log('data =>',data),
-    console.log('isLoading =>',isLoading),
-    console.log('error =>',error),
+    // console.log('data =>',data),
+    // console.log('isLoading =>',isLoading),
+    // console.log('error =>',error),
 
     <HomeWrapper>
         <div theme={theme} style={{ height: 400, width: '100%' }}>

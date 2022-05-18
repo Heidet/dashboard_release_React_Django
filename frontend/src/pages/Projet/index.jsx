@@ -7,6 +7,13 @@ import * as React from 'react';
 import { Row } from 'react-bootstrap';
 import Grid from './grid';
 import  IframeCommit from './iframeCommit';
+import MuiDrawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import Divider from '@mui/material/Divider';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import List from '@mui/material/List';
+import Toolbar from '@mui/material/Toolbar';
+// import { mainListItems, secondaryListItems } from '../Home/listItems';
 
 import {
   DataGrid,
@@ -37,6 +44,12 @@ const StyledTitle = styled.h1`
   line-height: 50px;
   color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
 `
+const StyledSubTitle = styled.h3`
+  text-align: center;
+  padding-bottom: 30px;
+  line-height: 50px;
+  color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
+`
 
 const ContainerGrid = styled.div`
     // display: flex;
@@ -45,6 +58,7 @@ const ContainerGrid = styled.div`
     padding-top: 2%;
     justify-content: center;
 `
+
 
 const HomeWrapper = styled.div`
   // display: flex;
@@ -59,13 +73,42 @@ const LoaderWrapper = styled.div`
   justify-content: center;
 `
 
+// const drawerWidth = 240;
+
+// const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+//   ({ theme, open }) => ({
+//     '& .MuiDrawer-paper': {
+//       position: 'relative',
+//       whiteSpace: 'nowrap',
+//       width: drawerWidth,
+//       transition: theme.transitions.create('width', {
+//         easing: theme.transitions.easing.sharp,
+//         duration: theme.transitions.duration.enteringScreen,
+//       }),
+//       boxSizing: 'border-box',
+//       ...(!open && {
+//         overflowX: 'hidden',
+//         transition: theme.transitions.create('width', {
+//           easing: theme.transitions.easing.sharp,
+//           duration: theme.transitions.duration.leavingScreen,
+//         }),
+//         width: theme.spacing(7),
+//         [theme.breakpoints.up('sm')]: {
+//           width: theme.spacing(9),
+//         },
+//       }),
+//     },
+//   }),
+// );
+
 
 function Projet(props) {
   const { theme } = useTheme()
   const { id } = props.match.params
   const title = props.match.params.id
-  const { data, isLoading, error } = useFetch(`https://api.github.com/repos/Heidet/${id}/commits`)
-  
+  const { data, isLoading, error } = useFetch(`https://api.github.com/repos/Heidet/${id}`)
+
+  console.log(data)
 
   if (error) {
     return <span>Il y a un problème</span>
@@ -78,8 +121,12 @@ function Projet(props) {
     //   console.log(data),
       <HomeWrapper theme={theme}>
         <StyledTitle theme={theme}>
-            Projet {title}
+            Projet: {title}
         </StyledTitle>
+        <StyledSubTitle theme={theme}>
+          {data.description}
+        </StyledSubTitle>
+    
         <Container fluid="lg">
             <Card>
                 <CardHeader>
@@ -106,7 +153,7 @@ function Projet(props) {
                 <Grid id={id}/>
             </ContainerGrid>
         </Container>
-        <Container fluid="lg">
+        <Container fluid="lg" style={{ paddingTop: '2%' }}>
               <IframeCommit id={id}/>
         </Container>
       </HomeWrapper>

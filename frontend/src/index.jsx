@@ -11,18 +11,23 @@ import Footer from './components/Footer'
 import Error from './components/Error'
 import Navbar from './components/Navbar'
 
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import MuiDrawer from '@mui/material/Drawer';
 import Modal from './components/Modal'
 import GlobalStyle from './utils/style/GlobalStyle'
 import 'bootstrap/dist/css/bootstrap.css';
-import { ThemeProvider, SurveyProvider } from './utils/context'
+import { ThemeProviderLocal, SurveyProvider } from './utils/context'
+
+
 
 ReactDOM.render(
   // <React.StrictMode>
     <Router>
-      <ThemeProvider>
+      <ThemeProviderLocal>
         <SurveyProvider>
           <GlobalStyle />
           <Navbar />
+
           {/* <Header /> */}
           <Switch>
             <Route exact path="/">
@@ -44,7 +49,7 @@ ReactDOM.render(
           </Switch>
           <Footer />
         </SurveyProvider>
-      </ThemeProvider>
+      </ThemeProviderLocal>
     </Router>,
   // </React.StrictMode>,
   document.getElementById('root')
