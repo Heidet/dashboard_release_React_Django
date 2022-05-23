@@ -1,28 +1,8 @@
 import styled from 'styled-components'
-import colors from '../../utils/style/colors'
 import { useFetch, useTheme } from '../../utils/hooks'
 import { StyledLink, Loader } from '../../utils/style/Atoms'
-import Col from 'react-bootstrap/Col';
 import * as React from 'react';
-import { Row } from 'react-bootstrap';
 import Grid from './grid';
-import  IframeCommit from './iframeCommit';
-import MuiDrawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import Divider from '@mui/material/Divider';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import List from '@mui/material/List';
-import Toolbar from '@mui/material/Toolbar';
-// import { mainListItems, secondaryListItems } from '../Home/listItems';
-
-import {
-  DataGrid,
-  GridToolbarContainer,
-  GridToolbarColumnsButton,
-  GridToolbarFilterButton,
-  GridToolbarExport,
-  GridToolbarDensitySelector,
-} from '@mui/x-data-grid';
 
 import {
     Card,
@@ -31,6 +11,7 @@ import {
     CardTitle,
     CardText,
     Button,
+    Progress,
     CardFooter,
     Container,
     ListGroup,
@@ -50,6 +31,7 @@ const StyledSubTitle = styled.h3`
   line-height: 50px;
   color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
 `
+
 
 const ContainerGrid = styled.div`
     // display: flex;
@@ -73,42 +55,33 @@ const LoaderWrapper = styled.div`
   justify-content: center;
 `
 
-// const drawerWidth = 240;
+    //   Object.entries(languagesData.data).map(([key, value]) => (
+    //     console.log({key}),
+        // console.log({value})
 
-// const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-//   ({ theme, open }) => ({
-//     '& .MuiDrawer-paper': {
-//       position: 'relative',
-//       whiteSpace: 'nowrap',
-//       width: drawerWidth,
-//       transition: theme.transitions.create('width', {
-//         easing: theme.transitions.easing.sharp,
-//         duration: theme.transitions.duration.enteringScreen,
-//       }),
-//       boxSizing: 'border-box',
-//       ...(!open && {
-//         overflowX: 'hidden',
-//         transition: theme.transitions.create('width', {
-//           easing: theme.transitions.easing.sharp,
-//           duration: theme.transitions.duration.leavingScreen,
-//         }),
-//         width: theme.spacing(7),
-//         [theme.breakpoints.up('sm')]: {
-//           width: theme.spacing(9),
-//         },
-//       }),
-//     },
-//   }),
-// );
+function CalculLanguages(id) {
+  const languagesData = useFetch(`https://api.github.com/repos/Heidet/${id}/languages`)
+  // console.log('fonction =>',languagesData)
+  if(languagesData.isLoading == true){
+    return languagesData.data
+  }
+}
+
+ 
 
 
 function Projet(props) {
   const { theme } = useTheme()
   const { id } = props.match.params
   const title = props.match.params.id
+  const dataFile = useFetch(`https://api.github.com/repos/Heidet/${id}/contents`)
+
   const { data, isLoading, error } = useFetch(`https://api.github.com/repos/Heidet/${id}`)
 
-  console.log(data)
+  // console.log(data)  const dataFile = useFetch(`https://api.github.com/repos/Heidet/${id}/contents`)
+  const languagesData = CalculLanguages(id)
+
+  
 
   if (error) {
     return <span>Il y a un problème</span>
@@ -118,33 +91,65 @@ function Projet(props) {
         <Loader data-testid="loader" />
       </LoaderWrapper>
     ) : (
+      
     //   console.log(data),
       <HomeWrapper theme={theme}>
         <StyledTitle theme={theme}>
             Projet: {title}
         </StyledTitle>
         <StyledSubTitle theme={theme}>
-          {data.description}
+            {data.description}
         </StyledSubTitle>
-    
         <Container fluid="lg">
-            <Card>
-                <CardHeader>
+            <Card theme={theme}>
+                <CardHeader theme={theme}>
                     File
+
+                    {Object.entries(languagesData).map(([key, value]) => (
+                      <Progress
+                       color="success"
+                       value="value"
+                     />
+                    ))}
+                  <Progress
+                      color="success"
+                      value="25"
+                    />
+                    <Progress
+                      color="info"
+                      value={50}
+                    />
+                    <Progress
+                      color="warning"
+                      value={75}
+                    />
+                    <Progress
+                      color="danger"
+                      value="100"
+                    />
                 </CardHeader>
-                <CardBody>
-                    <CardTitle tag="h5">
-                        Special Title Treatment
-                    </CardTitle>
-                    <CardText>
-                        
-                    <ListGroup>
-                        <ListGroupItem href="#" tag="a">
-                            Vestibulum at eros
+                <ListGroup theme={theme}>
+                  {dataFile.data.map(i => {
+                    if(i.type == 'dir'){
+                      return (
+                        <ListGroupItem className="justify-content-between">
+                          {i.name}{' '}
                         </ListGroupItem>
-                    </ListGroup>
-                    </CardText>
-                </CardBody>
+                      )
+                    }
+                  })}
+                </ListGroup>
+                <ListGroup>
+                  {dataFile.data.map(i => {
+                    if(i.type == 'file'){
+                      return (
+                        <ListGroupItem className="justify-content-between">
+                          {i.name}{' '}
+                        </ListGroupItem>
+                      )
+                    }
+                  })}
+                </ListGroup>
             </Card>
         </Container>
 
@@ -152,9 +157,6 @@ function Projet(props) {
             <ContainerGrid>
                 <Grid id={id}/>
             </ContainerGrid>
-        </Container>
-        <Container fluid="lg" style={{ paddingTop: '2%' }}>
-              <IframeCommit id={id}/>
         </Container>
       </HomeWrapper>
   );

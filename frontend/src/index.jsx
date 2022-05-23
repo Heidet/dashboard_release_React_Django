@@ -21,28 +21,22 @@ import { ThemeProviderLocal, SurveyProvider } from './utils/context'
 
 
 ReactDOM.render(
-  // <React.StrictMode>
     <Router>
       <ThemeProviderLocal>
         <SurveyProvider>
           <GlobalStyle />
           <Navbar />
-
-          {/* <Header /> */}
           <Switch>
             <Route exact path="/">
               <Home />
             </Route>
-            {/* <Route path="/survey/:questionNumber">
-              <Survey />
-            </Route> */}
-            {<Route path="/todos">
+            <Route path="/todos">
               <Todos />
-            </Route>}
-            { <Route 
+            </Route>
+            <Route 
               path="/projet/:id"
               render={(props) => <Projet {...props} />}
-              />}
+              />
             <Route path="*">
               <Error />
             </Route>
@@ -51,6 +45,5 @@ ReactDOM.render(
         </SurveyProvider>
       </ThemeProviderLocal>
     </Router>,
-  // </React.StrictMode>,
   document.getElementById('root')
 )

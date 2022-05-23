@@ -8,14 +8,12 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Repos from '../Repos';
 import { useTheme } from '../../utils/hooks'
-import ToolbarDrawer from '../../components/toolbarDrawer'
+import ToolbarDrawer from '../../components/ToolbarDrawer'
 
 // const mdTheme = createTheme();
 
 function DashboardContent() {
     const { theme } = useTheme()
-    const [open, setOpen] = React.useState(true);
-
 
   return (
     // <ThemeProvider theme={theme}>

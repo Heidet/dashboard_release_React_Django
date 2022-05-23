@@ -73,40 +73,34 @@ const columns = [
 
 
 
-export default function Grid(id) {
+export default function Grid(params) {
   const { theme } = useTheme()
   const { data, isLoading, error } = useFetch(
-    `https://api.github.com/repos/Heidet/dashboard_release/commits`
+    `https://api.github.com/repos/Heidet/${params.id}/commits`
   )
-  
+
   if (error) {
     return <span>Il y a un problème</span>
   }
-  // console.log('params grid =>',params)
-  // console.log(data)
-  // console.log(id)
-
 
   return isLoading ? (
       <LoaderWrapper>
         <Loader data-testid="loader" />
       </LoaderWrapper>
     ) : (
-    // console.log('data =>',data),
-    // console.log('isLoading =>',isLoading),
-    // console.log('error =>',error),
 
     <HomeWrapper>
+      
         <div theme={theme} style={{ height: 400, width: '100%' }}>
           <DataGrid
             rows={data}
-            getRowId= {(params) =>  params}
+            getRowId= {(params) => params}
             columns={columns}
             pageSize={15}
             density="compact"
-            isRowSelectable={(params) =>  console.log(params)}
+            // isRowSelectable={(params) =>  console.log(params)}
             disableMultipleSelection= {true}
-            onCellClick={(params)  => console.log(params)}
+            // onCellClick={(params)  => console.log(params)}
             components={{
               Toolbar: CustomToolbar,
             }}

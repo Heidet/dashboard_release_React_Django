@@ -9,7 +9,7 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import { styled, createTheme } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
-// import styled from 'styled-components'
+
 const drawerWidth = 240;
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
