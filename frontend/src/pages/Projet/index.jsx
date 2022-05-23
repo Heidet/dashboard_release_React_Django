@@ -80,7 +80,7 @@ function Projet(props) {
 
   // console.log(data)  const dataFile = useFetch(`https://api.github.com/repos/Heidet/${id}/contents`)
   const languagesData = CalculLanguages(id)
-
+  console.log(languagesData)
   
 
   if (error) {
@@ -102,16 +102,17 @@ function Projet(props) {
         </StyledSubTitle>
         <Container fluid="lg">
             <Card theme={theme}>
-                <CardHeader theme={theme}>
-                    File
+                <CardHeader >
+                    {/* File */}
 
-                    {Object.entries(languagesData).map(([key, value]) => (
+                    {/* {languagesData.map(([key, value]) => (
                       <Progress
                        color="success"
                        value="value"
                      />
-                    ))}
-                  <Progress
+                    ))} */}
+              
+                  {/* <Progress
                       color="success"
                       value="25"
                     />
@@ -126,7 +127,7 @@ function Projet(props) {
                     <Progress
                       color="danger"
                       value="100"
-                    />
+                    /> */}
                 </CardHeader>
                 <ListGroup theme={theme}>
                   {dataFile.data.map(i => {
