@@ -3,6 +3,7 @@ import { useFetch, useTheme } from '../../utils/hooks'
 import { StyledLink, Loader } from '../../utils/style/Atoms'
 import * as React from 'react';
 import Grid from './grid';
+import Langagues from './langaguesChart';
 
 import {
     Card,
@@ -75,12 +76,8 @@ function Projet(props) {
   const { id } = props.match.params
   const title = props.match.params.id
   const dataFile = useFetch(`https://api.github.com/repos/Heidet/${id}/contents`)
-
   const { data, isLoading, error } = useFetch(`https://api.github.com/repos/Heidet/${id}`)
 
-  // console.log(data)  const dataFile = useFetch(`https://api.github.com/repos/Heidet/${id}/contents`)
-  const languagesData = CalculLanguages(id)
-  console.log(languagesData)
   
 
   if (error) {
@@ -102,33 +99,7 @@ function Projet(props) {
         </StyledSubTitle>
         <Container fluid="lg">
             <Card theme={theme}>
-                <CardHeader >
-                    {/* File */}
-
-                    {/* {languagesData.map(([key, value]) => (
-                      <Progress
-                       color="success"
-                       value="value"
-                     />
-                    ))} */}
-              
-                  {/* <Progress
-                      color="success"
-                      value="25"
-                    />
-                    <Progress
-                      color="info"
-                      value={50}
-                    />
-                    <Progress
-                      color="warning"
-                      value={75}
-                    />
-                    <Progress
-                      color="danger"
-                      value="100"
-                    /> */}
-                </CardHeader>
+              <Langagues id={id}/>
                 <ListGroup theme={theme}>
                   {dataFile.data.map(i => {
                     if(i.type == 'dir'){
