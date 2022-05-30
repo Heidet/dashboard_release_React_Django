@@ -1,0 +1,19 @@
+h1, p {
+    font-family: Lato;
+  }
+  
+  .bg-bg-awesome {
+    background-color: purple!important;
+  }
+  .bg-bg-more-awesome{
+    background-color: lightcoral!important;
+  }
+  .bg-bg-awesomer {
+    background-color: tan!important;
+  }
+  .bg-bg-awesomest {
+    background-color: brown!important;
+  }
+  .bg-bg-most-awesome {
+    background-color: turquoise!important;
+  }
