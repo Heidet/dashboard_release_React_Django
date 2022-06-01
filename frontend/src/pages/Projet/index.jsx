@@ -1,24 +1,15 @@
-import styled from 'styled-components'
-import { useFetch, useTheme } from '../../utils/hooks'
-import { StyledLink, Loader } from '../../utils/style/Atoms'
+import styled from 'styled-components';
+import { useFetch, useTheme } from '../../utils/hooks';
+import { Loader } from '../../utils/style/Atoms';
+import RenderHeaderDirFile from './renderHeaderDirFile';
 import * as React from 'react';
 import Grid from './grid';
 import Langagues from './langaguesChart';
 
-
 import {
     Card,
-    CardHeader,
-    CardBody,
-    CardTitle,
-    CardText,
-    Button,
-    Progress,
-    CardFooter,
     Container,
-    ListGroup,
-    ListGroupItem
-  } from "reactstrap";
+} from "reactstrap";
 
 
 const StyledTitle = styled.h1`
@@ -55,29 +46,16 @@ const LoaderWrapper = styled.div`
   justify-content: center;
 `
 
-    //   Object.entries(languagesData.data).map(([key, value]) => (
-    //     console.log({key}),
-        // console.log({value})
+const HeaderLanguage = styled.div`
+  background-color: rgba(0, 0, 0, 0.03);
+`
 
-function CalculLanguages(id) {
-  const languagesData = useFetch(`https://api.github.com/repos/Heidet/${id}/languages`)
-  // console.log('fonction =>',languagesData)
-  if(languagesData.isLoading == true){
-    return languagesData.data
-  }
-}
-
- 
-
-
-function Projet(props) {
+export default function Projet(props) {
   const { theme } = useTheme()
   const { id } = props.match.params
   const title = props.match.params.id
-  const dataFile = useFetch(`https://api.github.com/repos/Heidet/${id}/contents`)
   const { data, isLoading, error } = useFetch(`https://api.github.com/repos/Heidet/${id}`)
-
-  
+ 
 
   if (error) {
     return <span>Il y a un problème</span>
@@ -97,32 +75,11 @@ function Projet(props) {
         </StyledSubTitle>
         <Container fluid="lg">
             <Card theme={theme}>
+              <HeaderLanguage> File </HeaderLanguage>
               <Langagues id={id}/>
-                <ListGroup theme={theme}>
-                  {dataFile.data.map(i => {
-                    if(i.type == 'dir'){
-                      return (
-                        <ListGroupItem className="justify-content-between">
-                          {i.name}{' '}
-                        </ListGroupItem>
-                      )
-                    }
-                  })}
-                </ListGroup>
-                <ListGroup>
-                  {dataFile.data.map(i => {
-                    if(i.type == 'file'){
-                      return (
-                        <ListGroupItem className="justify-content-between">
-                          {i.name}{' '}
-                        </ListGroupItem>
-                      )
-                    }
-                  })}
-                </ListGroup>
+              <RenderHeaderDirFile id={id}/>
             </Card>
         </Container>
-
         <Container fluid="lg">
             <ContainerGrid >
                 <Grid id={id} />
@@ -132,5 +89,3 @@ function Projet(props) {
   );
 }
 
-
-export default Projet

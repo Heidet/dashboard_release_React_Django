@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { mainListItems, secondaryListItems } from './listItems';
+import { mainListItems } from './listItems';
 import Box from '@mui/material/Box';
 import { useTheme } from '../../utils/hooks'
 import IconButton from '@mui/material/IconButton';
@@ -7,7 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import { styled, createTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 
 const drawerWidth = 240;

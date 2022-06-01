@@ -5,15 +5,27 @@ h1, p {
   .bg-bg-awesome {
     background-color: purple!important;
   }
+  .bg-python {
+    background-color: #3572A5!important;
+  }
+  .bg-css {
+    background-color: #563d7c!important;
+  }
+  .bg-php {
+    background-color: #4F5D95!important;
+  }
+  .bg-javascript {
+    background-color: #f1e05a!important;
+  }
   .bg-bg-more-awesome{
     background-color: lightcoral!important;
   }
   .bg-bg-awesomer {
     background-color: tan!important;
   }
-  .bg-bg-awesomest {
+  .bg-html {
     background-color: brown!important;
   }
-  .bg-bg-most-awesome {
+  .bg-sql, .bg-tsql{
     background-color: turquoise!important;
   }

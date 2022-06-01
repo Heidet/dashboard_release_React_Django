@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Modal from "../../components/Modal";
 import axios from "axios";
-import { useTheme } from '../../utils/hooks'
 
 class Todos extends Component {
   constructor(props) {
@@ -128,7 +127,6 @@ class Todos extends Component {
   };
 
   render() {
-      
     return (
       <main className="container">
         <h1 className="text-white text-uppercase text-center my-4">Todo Application</h1>
