@@ -5,6 +5,7 @@ import RenderHeaderDirFile from './renderHeaderDirFile';
 import * as React from 'react';
 import Grid from './grid';
 import Langagues from './langaguesChart';
+import Todos from '../Todos/index'
 
 import {
     Card,
@@ -85,6 +86,10 @@ export default function Projet(props) {
                 <Grid id={id} />
             </ContainerGrid >
         </Container>
+        <Container fluid="lg">
+          <Todos id={id}/>
+        </Container>
+
       </HomeWrapper>
   );
 }

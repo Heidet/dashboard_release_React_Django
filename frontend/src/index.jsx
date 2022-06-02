@@ -30,9 +30,9 @@ ReactDOM.render(
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/todos">
+            {/* <Route path="/todos">
               <Todos />
-            </Route>
+            </Route> */}
             <Route 
               path="/projet/:id"
               render={(props) => <Projet {...props} />}

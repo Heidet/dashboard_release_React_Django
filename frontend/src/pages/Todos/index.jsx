@@ -12,6 +12,7 @@ class Todos extends Component {
       activeItem: {
         title: "",
         description: "",
+        hashview: this.props,
         completed: false,
       },
     };
@@ -35,6 +36,7 @@ class Todos extends Component {
   handleSubmit = (item) => {
     this.toggle();
 
+    item.hashview = String(this.props.id)
     if (item.id) {
       axios
         .put(`/api/todos/${item.id}/`, item)
@@ -53,8 +55,7 @@ class Todos extends Component {
   };
 
   createItem = () => {
-    const item = { title: "", description: "", completed: false };
-
+    const item = { title: "", description: "", hashview: "", completed: false };
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
 
@@ -92,8 +93,9 @@ class Todos extends Component {
   renderItems = () => {
     const { viewCompleted } = this.state;
     const newItems = this.state.todoList.filter(
-      (item) => item.completed === viewCompleted
+      (item) => item.completed === viewCompleted && item.hashview === this.props.id
     );
+
 
     return newItems.map((item) => (
       <li

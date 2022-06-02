@@ -5,6 +5,7 @@ from django.db import models
 class Todo(models.Model):
     title = models.CharField(max_length=120)
     description = models.TextField()
+    hashview = models.TextField(blank=True, default=" ")
     completed = models.BooleanField(default=False)
 
     def _str_(self):
