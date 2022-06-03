@@ -9,6 +9,11 @@ import Todos from '../Todos/index'
 
 import {
     Card,
+    Row,
+    Col,
+    CardBody,
+    CardTitle,
+    CardSubtitle,
     Container,
 } from "reactstrap";
 
@@ -35,12 +40,6 @@ const ContainerGrid = styled.div`
     justify-content: center;
 `
 
-const HomeWrapper = styled.div`
-  // display: flex;
-  width: '100%';
-  height: 400;
-  justify-content: center;
-`
 
 const LoaderWrapper = styled.div`
   display: flex;
@@ -66,31 +65,47 @@ export default function Projet(props) {
         <Loader data-testid="loader" />
       </LoaderWrapper>
     ) : (
-      
-      <HomeWrapper theme={theme}>
-        <StyledTitle theme={theme}>
+      <Card>
+        <CardBody className="text-center">
+          <CardTitle tag="h5">
             Projet: {title}
-        </StyledTitle>
-        <StyledSubTitle theme={theme}>
+          </CardTitle>
+
+          <CardSubtitle
+            className="text-center"
+            tag="h6"
+          >
             {data.description}
-        </StyledSubTitle>
-        <Container fluid="lg">
-            <Card theme={theme}>
-              <HeaderLanguage> File </HeaderLanguage>
-              <Langagues id={id}/>
-              <RenderHeaderDirFile id={id}/>
-            </Card>
+          </CardSubtitle>
+        </CardBody>
+        <Container className="justify-content-center" fluid >
+          <Row xs="2 justify-content-center">
+            <Col xs="6">
+              <Container fluid="lg">
+                  <Card theme={theme}>
+                    <HeaderLanguage> File </HeaderLanguage>
+                    <Langagues id={id}/>
+                    <RenderHeaderDirFile id={id}/>
+                  </Card>
+              </Container>
+              <Container fluid="lg">
+                <ContainerGrid >
+                    <Grid id={id} />
+                </ContainerGrid >
+              </Container>
+            </Col>
+            <Col xs="3">
+              <Container  fluid="lg">
+                <Todos id={id}/>
+              </Container>
+            </Col>
+          </Row>
         </Container>
-        <Container fluid="lg">
-            <ContainerGrid >
-                <Grid id={id} />
-            </ContainerGrid >
-        </Container>
-        <Container fluid="lg">
-          <Todos id={id}/>
-        </Container>
+      </Card>
 
-      </HomeWrapper>
-  );
+   
+
+
+
+  )
 }
-

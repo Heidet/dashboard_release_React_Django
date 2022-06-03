@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Modal from "../../components/Modal";
 import axios from "axios";
+import {
+  CardTitle,
+} from "reactstrap";
 
 class Todos extends Component {
   constructor(props) {
@@ -131,9 +134,11 @@ class Todos extends Component {
   render() {
     return (
       <main className="container">
-        <h1 className="text-white text-uppercase text-center my-4">Todo Application</h1>
+          <CardTitle className="text-center" tag="h5">
+            Todo Application
+          </CardTitle>
         <div className="row">
-          <div className="col-md-6 col-sm-10 mx-auto p-0">
+          <div className="col-md-12 col-sm-10 mx-auto p-0">
             <div className="card p-3">
               <div className="mb-4">
                 <button

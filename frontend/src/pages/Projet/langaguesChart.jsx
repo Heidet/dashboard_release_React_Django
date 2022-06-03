@@ -35,8 +35,6 @@ export default function Langagues(params) {
         for(let i = 0; i < languages.length; i++) {
             let total = (languages[i][1] / sum ) *100;
             let languagesName = languages[i][0];
-            // console.log('languagesName =>',languagesName)
-            // console.log('total =>',total)
 
             // Ici pour rajouter une couleur par language, rajouter dans '../../utils/style/progress.css';
             languagesName = languagesName.toLowerCase();
@@ -51,7 +49,9 @@ export default function Langagues(params) {
             <Progress
                 color={item.langage}
                 value={item.valuePercent}
-            />
+            >
+            {item.langage}
+            </Progress>
         );
         itemRows.push(row);
     }
@@ -60,7 +60,7 @@ export default function Langagues(params) {
         <LoaderWrapper>
             <Loader data-testid="loader" />
         </LoaderWrapper>
-        ) : (
+        ) : (            
         <CardHeader> 
             {itemRows}
         </CardHeader> 
