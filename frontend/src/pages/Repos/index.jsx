@@ -1,11 +1,10 @@
 import styled from 'styled-components'
-import colors from '../../utils/style/colors'
-import { StyledLink, Loader } from '../../utils/style/Atoms'
+import { Loader } from '../../utils/style/Atoms'
 import { useTheme, useFetch } from '../../utils/hooks'
 import * as React from 'react';
-import { Redirect, Link } from 'react-router-dom'
-import { useNavigate, useLocation } from "react-router-dom";
-import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom'
+import { Button } from 'reactstrap';
+
 import {
   DataGrid,
   GridToolbarContainer,
@@ -14,7 +13,6 @@ import {
   GridToolbarExport,
   GridToolbarDensitySelector,
 } from '@mui/x-data-grid';
-
 
 const HomeWrapper = styled.div`
   // display: flex;
@@ -27,7 +25,6 @@ const LoaderWrapper = styled.div`
   display: flex;
   justify-content: center;
 `
-
 
 function CustomToolbar() {
   return (
@@ -45,15 +42,15 @@ const columns = [
   {
     field: "Detail",
     headerName: "Detail",
-    width: 150,
+    width: 100,
     renderCell: (params) => (
-      <Link to={`/projet/${params.row.name}`}>Detail</Link>
+      <Button outline color="primary"><Link to={`/projet/${params.row.name}`}>Detail</Link></Button>
     )
   },
-  { field: 'id', headerName: 'ID', width: 200, },
-  { field: "name", headerName: "Projet", width: 200},
-  { field: "full_name", headerName: "Full_name", width: 200 },
-  { field: "updated_at", headerName: "updated_at", width: 200 },
+  { field: 'id', headerName: 'ID', width: 200,},
+  { field: "name", headerName: "Projet", width: 200,},
+  { field: "full_name", headerName: "Full_name", width: 200,},
+  { field: "updated_at", headerName: "updated_at", width: 200,},
 ];
 
 
@@ -77,6 +74,7 @@ export default function Repos() {
     <HomeWrapper>
         <div theme={theme} style={{ height: 400, width: '100%' }}>
           <DataGrid
+            rowHeight={80}
             rows={data}
             columns={columns}
             pageSize={15}

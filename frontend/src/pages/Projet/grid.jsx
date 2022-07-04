@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import colors from '../../utils/style/colors'
 import { useTheme, useFetch } from '../../utils/hooks'
-import { StyledLink, Loader } from '../../utils/style/Atoms'
-import { Redirect, Link } from 'react-router-dom'
-
+import { Loader } from '../../utils/style/Atoms'
+import { Link } from 'react-router-dom'
+import { Button } from 'reactstrap';
 import * as React from 'react';
+
 import {
   DataGrid,
   GridToolbarContainer,
@@ -42,15 +42,13 @@ const columns = [
   {
     field: "Detail",
     headerName: "Detail",
-    width: 150,
-    // renderCell: (params) => (
-    //   // console.log('params =>',params)
-    //   // <Link to={`/projet/${params.row.name}`}>Detail</Link>
-    // )
+    width: 100,
+    renderCell: (params) => (
+      <Button outline color="primary"><Link to={`/projet/${params.row.name}`}>Detail</Link></Button>
+    )
   },
   { field: 'sha', headerName: 'ID', width: 200, 
   valueGetter: (params) => {
-    // console.log(params)
     var result = params.id.sha
     return result
   }},
@@ -88,19 +86,16 @@ export default function Grid(params) {
         <Loader data-testid="loader" />
       </LoaderWrapper>
     ) : (
-
     <HomeWrapper>
-      
         <div theme={theme} style={{ height: 400, width: '100%' }}>
           <DataGrid
+            rowHeight={80}
             rows={data}
             getRowId= {(params) => params}
             columns={columns}
             pageSize={15}
             density="compact"
-            // isRowSelectable={(params) =>  console.log(params)}
             disableMultipleSelection= {true}
-            // onCellClick={(params)  => console.log(params)}
             components={{
               Toolbar: CustomToolbar,
             }}

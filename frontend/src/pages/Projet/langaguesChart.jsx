@@ -48,9 +48,10 @@ export default function Langagues(params) {
         const row = (
             <Progress
                 color={item.langage}
-                value={item.valuePercent}
+                value={5+item.valuePercent}
             >
-            {item.langage}
+            {item.langage} {item.valuePercent}%  
+
             </Progress>
         );
         itemRows.push(row);

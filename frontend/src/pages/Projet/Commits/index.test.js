@@ -2,7 +2,7 @@ import Results, { formatQueryParams, formatJobList } from '.'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import { waitForElementToBeRemoved, screen } from '@testing-library/react'
-import { render } from '../../utils/test'
+import { render } from '../../../utils/test'
 
 describe('The formatJobList function', () => {
   it('should add a comma to a word', () => {

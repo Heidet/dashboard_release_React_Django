@@ -145,7 +145,7 @@ class Todos extends Component {
                   className="btn btn-primary"
                   onClick={this.createItem}
                 >
-                  Add task
+                  Ajouter une tâche
                 </button>
               </div>
               {this.renderTabList()}

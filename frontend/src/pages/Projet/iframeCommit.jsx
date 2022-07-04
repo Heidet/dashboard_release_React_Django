@@ -11,7 +11,6 @@ import "prismjs/themes/prism.css"; //Example style, you can use another
 import { Component } from 'react'
 // import CodeEditor from '@uiw/react-textarea-code-editor';
 import "../../utils/style/codeeditor.css"
-
 import Prism from 'prismjs';
 
 const LoaderWrapper = styled.div`

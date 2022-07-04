@@ -17,10 +17,10 @@ h1, p {
   .bg-javascript {
     background-color: #f1e05a!important;
   }
-  .bg-bg-more-awesome{
+  .bg-xonsh{
     background-color: lightcoral!important;
   }
-  .bg-bg-awesomer {
+  .bg-shell, .bg-powershell {
     background-color: tan!important;
   }
   .bg-html {

@@ -5,6 +5,8 @@ import RenderHeaderDirFile from './renderHeaderDirFile';
 import * as React from 'react';
 import Grid from './grid';
 import Langagues from './langaguesChart';
+import IframeCommit from './iframeCommit';
+
 import Todos from '../Todos/index'
 
 import {
@@ -17,29 +19,25 @@ import {
     Container,
 } from "reactstrap";
 
-
-const StyledTitle = styled.h1`
-  text-align: center;
-  padding-bottom: 30px;
-  line-height: 50px;
-  color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
+const StyledCard = styled(Card)` 
+  background-color: ${({ $theme }) => ($theme === 'light' ? '#ffffff' : '#8186a0')};
+`
+const CardTitleStyled = styled(CardTitle)` 
+  color: ${({ theme }) => (theme === 'light' ? '#8186a0' : '#ffffff')};
 `
 
-const StyledSubTitle = styled.h3`
-  text-align: center;
-  padding-bottom: 30px;
-  line-height: 50px;
-  color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
+const CardSubtitleStyled = styled(CardTitle)`
+  color: ${({ theme }) => (theme === 'light' ? '#8186a0' : '#ffffff')};
 `
 
 const ContainerGrid = styled.div`
     // display: flex;
+    color: ${({ theme }) => (theme === 'light' ? '#8186a0' : '#ffffff')};
     width: '100%';
     height: 400;
     padding-top: 2%;
     justify-content: center;
 `
-
 
 const LoaderWrapper = styled.div`
   display: flex;
@@ -47,6 +45,7 @@ const LoaderWrapper = styled.div`
 `
 
 const HeaderLanguage = styled.div`
+  color: ${({ theme }) => (theme === 'light' ? '#8186a0' : '#ffffff')};
   background-color: rgba(0, 0, 0, 0.03);
 `
 
@@ -65,47 +64,45 @@ export default function Projet(props) {
         <Loader data-testid="loader" />
       </LoaderWrapper>
     ) : (
-      <Card>
-        <CardBody className="text-center">
-          <CardTitle tag="h5">
+      <StyledCard $theme={theme}>
+        <CardBody className="text-center" >
+          <CardTitleStyled tag="h5" $theme={theme}>
             Projet: {title}
-          </CardTitle>
+          </CardTitleStyled>
 
-          <CardSubtitle
+          <CardSubtitleStyled
             className="text-center"
             tag="h6"
           >
             {data.description}
-          </CardSubtitle>
+          </CardSubtitleStyled>
         </CardBody>
-        <Container className="justify-content-center" fluid >
-          <Row xs="2 justify-content-center">
-            <Col xs="6">
-              <Container fluid="lg">
+        <Container  className="justify-content-center" fluid >
+          <Row xs="2 justify-content-center" >
+            <Col xs="6" >
+              <Container fluid="lg"  >
                   <Card theme={theme}>
-                    <HeaderLanguage> File </HeaderLanguage>
+                    <HeaderLanguage theme={theme}> File </HeaderLanguage>
                     <Langagues id={id}/>
                     <RenderHeaderDirFile id={id}/>
                   </Card>
               </Container>
-              <Container fluid="lg">
-                <ContainerGrid >
+              <Container fluid="lg" >
+                <ContainerGrid theme={theme}>
                     <Grid id={id} />
                 </ContainerGrid >
               </Container>
             </Col>
             <Col xs="3">
-              <Container  fluid="lg">
+              <Container  fluid="lg" >
                 <Todos id={id}/>
               </Container>
             </Col>
           </Row>
         </Container>
-      </Card>
-
-   
-
-
-
+        <Container className="justify-content-center mt-5" >
+          <IframeCommit />
+        </Container>
+      </StyledCard>
   )
 }
